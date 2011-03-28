@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>{{ resume.user.display_name }}</title>
+	<STYLE TYPE='text/css'>
+/* CSS generated at csscreator.com */
+BODY{ color:#000033; font-family:sans-serif; font-size:medium; font-weight:normal; }
+P{ font-size:medium; font-family:sans-serif; font-weight:normal; text-decoration:none; }
+H1{color:#000066; font-size:x-large; font-family:sans-serif; font-weight:bolder; text-decoration:underline; }
+H2{color:#000066; background-color:#666666; font-size:large; font-family:sans-serif; font-weight:none; }
+H3{color:#006666; background-color:#CCCCCC; font-size:medium; font-family:sans-serif; font-weight:bold; }
+</STYLE>
+</head>
+<body>
+{% if resume %}
+
+<h1>{{ customuser.display_name }}</h1>
+<p>{{ resume.title}}</p>
+<p>{{ resume.description }}</p>
+<p>{{ customuser.address1 }}</p>
+<p>{{ customuser.address2 }}</p>
+<p>{{ customuser.city }}, {{ customuser.state }}, {{ customuser.zip }}, {{ customuser.country }}</p>
+<p>{{ customuser.email}}</p>
+
+{% if summary %}
+<h2>Summary</h2>
+<p>{{ summary.headline }}</p>
+<p>{{ summary.details }}</p>
+{% endif %}
+
+{% if workexperience_list %}
+<h2>Work Experience</h2>
+{% for workexp in workexperience_list %}
+<h3>{{ workexp.title }}, {{ workexp.company_name }}</h3>
+<p>
+	{% if workexp.city %}
+	  {{workexp.city}} , 
+	{% endif %}
+	{{workexp.state}}; {{ workexp.start_date }} - 
+	{% if workexp.end_date %}
+	  {{ workexp.end_date}}
+	{% else %}
+	  Present
+	{% endif %}
+</p>
+<p>{{workexp.summary}}</p>
+<p>{{workexp.details}}</p>
+{% endfor %}
+{% endif %}
+
+{% if education_list %}
+<h2>Education</h2>
+{% for edu in education_list %}
+<h3>{{ edu.title }}, {{ edu.institution_name}}</h3>
+<p>{{ edu.summary }}</p>
+<p>{{ edu.details }}</p>
+{% endfor %}
+{% endif %}
+
+{% if publication_list %}
+<h2>Publications</h2>
+{% for pub in publication_list %}
+<h3>{{ pub.title}}, {{pub.authors}}, {{pub_date}}</h3>
+<p>{{pub.details}}</p>
+<p>{{pub.url}}</p>
+{% endfor %}
+{% endif %}
+
+{% if skill_list %}
+<h2>Skills</h2>
+{% for skill in skill_list %}
+<p>{{skill.title}} - {{skill.summary}}, {{skill.years}} yrs</p>
+{% endfor %}
+{% endif %}
+
+{% if reference_list %}
+<h2>References</h2>
+{% for ref in reference_list %}
+<h3>{{ref.name}} ({{ref.email_address}})</h3>
+<p>{{ref.summary}}
+{% endfor %}
+{% endif %}
+
+{% else %}
+	<p>No resumes are available.</p>
+{% endif %}
+</body>
+</html>

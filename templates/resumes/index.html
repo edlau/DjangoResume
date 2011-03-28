@@ -1,0 +1,10 @@
+{% if latest_resume_list %}
+	<ul>
+		{% for resume in latest_resume_list %}
+			<li><a href="{{ resume.id }}/">{{ resume.user }} - {{ resume.title }}</a></li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No resumes are available.</p>
+{% endif %}
+
